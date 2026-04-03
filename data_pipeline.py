@@ -1,5 +1,7 @@
 import pandas as pd
 
+from features import build_features
+
 def load(file_path: str) -> pd.DataFrame:
     df = pd.read_csv(
         file_path,
@@ -29,6 +31,8 @@ def save_data(df: pd.DataFrame, output_path: str):
 def run_pipeline(input_path: str, output_path: str):
     df = load(input_path)
     df = clean(df)
+    df = build_features(df)
+    print(df.head())
     save_data(df, output_path)
 
 if __name__ == "__main__":
