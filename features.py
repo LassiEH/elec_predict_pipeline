@@ -22,4 +22,7 @@ def build_features(df: pd.DataFrame) -> pd.DataFrame:
     df = create_features_lag(df)
     df = create_features_rolling_mean(df)
 
+    # some NaN-values from lag calculations
+    df = df.dropna()
+
     return df
