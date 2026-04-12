@@ -1,3 +1,5 @@
+# TODO: katso onko tälle himmelille enää tarvetta
+
 import pandas as pd
 
 from features import build_features
