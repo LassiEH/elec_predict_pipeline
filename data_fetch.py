@@ -9,14 +9,7 @@ api_key = os.environ.get("FINGRID_API_KEY")
 # dataset 124 = electricity consumption
 req_url = "https://data.fingrid.fi/api/datasets/124/data"
 
-# ISO 8601 date, YYYY-MM-DDTHH:mm:ss
-# fetch daily
-midnight_t = datetime.combine(datetime.today(), time.min)
-midnight_y = midnight_t - timedelta(days=2)
-today = midnight_t.isoformat()
-yesterday = midnight_y.isoformat()
-
-def fetch_data():
+def fetch_data(start_time: datetime, end_time: datetime):
 
     all_data = []
 
@@ -26,8 +19,10 @@ def fetch_data():
 
     while True:
         payload = {
-            'startTime': yesterday, 
-            'endTime': today, 
+            # ISO 8601 date, YYYY-MM-DDTHH:mm:ss
+
+            'startTime': start_time.isoformat(), 
+            'endTime': end_time.isoformat(), 
             'page': page, 
             'pageSize': 100
         }

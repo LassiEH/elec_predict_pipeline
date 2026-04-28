@@ -8,7 +8,7 @@ def clean(df: pd.DataFrame) -> pd.DataFrame:
         "value": "consumption_mwh"
         })
     
-    df["time"] = pd.to_datetime(df["time"])
+    df["time"] = pd.to_datetime(df["time"], utc=True)
 
     df = df[["time", "consumption_mwh"]]
 

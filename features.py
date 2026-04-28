@@ -1,6 +1,7 @@
 import pandas as pd
 
 def create_features_time(df: pd.DataFrame) -> pd.DataFrame:
+    # Note that time is presented as utc and hour is utc+3
     df["hour"] = df["time"].dt.hour
     df["week_day"] = df["time"].dt.day_of_week
     df["month"] = df["time"].dt.month

@@ -17,6 +17,13 @@ def get_engine():
         f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
     )
 
-def save_to_db(df: pd.DataFrame, engine):
+def get_latest_timestamp(engine, table_name):
+    query = f"SELECT MAX (time) as max_time FROM {table_name}"
+
+    result = pd.read_sql(query, engine)
+
+    return result["max_time"][0]
+
+def save_to_db(df: pd.DataFrame, db_name, engine):
     
-    df.to_sql(DB_NAME, engine, if_exists='append', index=False)
+    df.to_sql(db_name, engine, if_exists='append', index=False)
